@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="551.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs1302.project2.view.AppointmentGuiCodeBehind">
+   <children>
+      <MenuBar prefHeight="30.0" prefWidth="647.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="loadFileMenuItem" mnemonicParsing="false" onAction="#onLoadFileClick" text="Load from File" />
+                  <MenuItem fx:id="loadWebMenuItem" mnemonicParsing="false" onAction="#onLoadWebClick" text="Load from Web" />
+                  <MenuItem fx:id="loadRandomMenuItem" mnemonicParsing="false" onAction="#onLoadRandomClick" text="Load Randomly Genererated" />
+                  <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#onSaveClick" text="Save to File (Part 1)" />
+                  <MenuItem fx:id="saveMenuItem2" mnemonicParsing="false" onAction="#onSave2Click" text="Save to File (Part 2)" />
+                  <MenuItem fx:id="saveMenuItem3" mnemonicParsing="false" onAction="#onSave3Click" text="Save to File (Part 3)" />
+                  <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#onExitCick" text="Exit" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text=" Sort">
+               <items>
+                  <MenuItem fx:id="sortbyDateMenuItem" mnemonicParsing="false" onAction="#onSortbyDateClick" text="Sort by Date" />
+                  <MenuItem fx:id="sortbyTypeDateMenuItem" mnemonicParsing="false" onAction="#onSortbyTypeDateClick" text="Sort by Type and Date" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Get">
+               <items>
+                  <MenuItem fx:id="earliestDateByTypeMenuItem" mnemonicParsing="false" onAction="#onEarliestAppointmentByTypeClick" text="Earliest Appointment by Type" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <Pane layoutX="14.0" layoutY="40.0" prefHeight="499.0" prefWidth="371.0">
+         <children>
+               
+            <Label alignment="TOP_RIGHT" layoutX="15.0" layoutY="30.0" prefHeight="18.0" prefWidth="65.0" text="Date:" />
+            <DatePicker fx:id="appointmentDate" editable="false" layoutX="101.0" layoutY="21.0" prefHeight="27.0" prefWidth="254.0" promptText="mm/dd/yyyy"/> 
+            
+            <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="60.0" prefHeight="18.0" prefWidth="65.0" text="Description:" />
+            <TextField fx:id="descriptionTextField" layoutX="101.0" layoutY="54.0" prefHeight="27.0" prefWidth="254.0" />
+
+            <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="90.0" prefHeight="18.0" prefWidth="65.0" text="Type:" />
+            <VBox layoutX="101.0" layoutY="90.0" prefHeight="108.0" prefWidth="76.0" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="dailyRadioButton" mnemonicParsing="false" onAction="#onDailyRadioClick" prefHeight="16.0" prefWidth="62.0" selected="true" text="Daily">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="monthlyRadiobutton" mnemonicParsing="false" onAction="#onMonthlyRadioClick" text="Monthly" toggleGroup="$group" />
+                  <RadioButton fx:id="yearlyRadioButton" mnemonicParsing="false" onAction="#onYearlyRadioClick" text="Yearly" toggleGroup="$group" />
+                  <RadioButton fx:id="singleRadioButton" mnemonicParsing="false" onAction="#onSingleRadioClick" text="Single" toggleGroup="$group" />
+               </children>
+            </VBox>
+
+            <Label alignment="CENTER_RIGHT" layoutX="179.0" layoutY="148.0" prefHeight="18.0" prefWidth="100.0" text="Number of Years:" />
+            <TextField fx:id="numberOfYearsTextField" disable="true" layoutX="302.0" layoutY="143.0" prefHeight="27.0" prefWidth="49.0" />
+            
+            <Label alignment="CENTER_RIGHT" layoutX="179.0" layoutY="175.0" prefWidth="100.0" text="Priority:" />
+			<TextField fx:id="priorityTextField" disable="true" layoutX="302.0" layoutY="170.0" prefHeight="27.0" prefWidth="49.0" />
+           
+            <Button fx:id="addButton" layoutX="15.0" layoutY="222.0" mnemonicParsing="false" onAction="#onAddButtonClick" prefWidth="100.0" text="Add" />
+            <Button fx:id="searchButton" layoutX="135.0" layoutY="222.0" mnemonicParsing="false" onAction="#onSearchButtonClick" prefWidth="100.0" text="Search" />            
+            <Button fx:id="clearButton" layoutX="255.0" layoutY="221.0" mnemonicParsing="false" onAction="#onClearButtonClick" prefHeight="27.0" prefWidth="100.0" text="Clear Inputs" />
+
+            <Label fx:id="errorMessageLabel" layoutX="14.0" layoutY="258.0" prefHeight="231.0" prefWidth="342.0" textFill="#eb0303" wrapText="true" />
+         </children>
+      </Pane>
+
+      <Pane layoutX="385.0" layoutY="40.0" prefHeight="499.0" prefWidth="262.0">
+         <children>
+            <ListView fx:id="appointmentListView" layoutX="14.0" layoutY="16.0" prefHeight="442.0" prefWidth="234.0" />
+            <Button fx:id="reloadButton" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="#onReloadButtonClick" prefWidth="110.0" text="Reload List" />
+            <Button fx:id="clearListButton" layoutX="137.0" layoutY="465.0" mnemonicParsing="false" onAction="#onClearListButtonClick" prefHeight="27.0" prefWidth="110.0" text="Clear List" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
